@@ -17,12 +17,12 @@
     tr:nth-child(even) {
       background-color: #dddddd;
     }
-    </style>
+</style>
 <script>
     function fix() {
       
       lastScroll = window.sessionStorage.getItem("catalog-list-scroll-position");
-      list_container = document.querySelector(".theTable");
+      list_container = document.querySelector(".tableFixHead");
       if (lastScroll !== null) {
         list_container.scrollTop = Number(lastScroll)
       }
@@ -31,7 +31,7 @@
         
     }
     function saveScroll() {
-        list_container = document.querySelector(".container-fluid");
+        list_container = document.querySelector(".tableFixHead");
         window.sessionStorage.setItem("catalog-list-scroll-position", list_container.scrollTop);
     }
 </script>
@@ -47,7 +47,7 @@
 <div class="container-fluid">
     <div class="tableFixHead">
       
-      <table class = "theTable">
+      <table>
           <tr>
               <th>Id</th>
               <th>Key</th>

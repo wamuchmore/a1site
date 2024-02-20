@@ -1,0 +1,38 @@
+<!-- templates/base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Studio Catalog{% endblock title %}</title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+    <style>
+        .errorlist{ 
+            color:red;
+        }
+        .tableFixHead {
+        overflow-y: auto; /* make the table scrollable if height is more than 200 px  */
+        height: 100%
+        }
+        .tableFixHead  th {
+            position: sticky; /* make the table heads sticky */
+            top: 0px; /* table head will be placed from the top of the table and sticks to it */
+        }
+        table {
+            border-collapse: collapse; /* make the table borders collapse to each other */
+        }
+        th {
+        background: #eee;
+        }
+    </style>
+</head>
+<body class="container-fluid" on onload="fix();">
+    <div class="catalog-header">
+        <h5 align="center" >Patty Maly Studo Catalog</h5>
+    </div>
+{% block page_content %}{% endblock page_content %}
+</body >
+</html>

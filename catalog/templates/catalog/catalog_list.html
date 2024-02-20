@@ -1,0 +1,94 @@
+<!-- catalog/templates/catalog/catalog_list.html -->
+
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #000000;
+      border-width: 1;
+      text-align: left;
+      padding: 8px, 16px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+<script>
+    function fix() {
+      
+      lastScroll = window.sessionStorage.getItem("catalog-list-scroll-position");
+      list_container = document.querySelector(".theTable");
+      if (lastScroll !== null) {
+        list_container.scrollTop = Number(lastScroll)
+      }
+      window.sessionStorage.setItem("catalog-list-scroll-position", null)
+
+        
+    }
+    function saveScroll() {
+        list_container = document.querySelector(".container-fluid");
+        window.sessionStorage.setItem("catalog-list-scroll-position", list_container.scrollTop);
+    }
+</script>
+
+{% extends "base.html" %}
+
+
+{% block page_content %}
+
+<button type="button">
+    <a href="{% url 'catalog:catalog_add' %}">Add</a>
+</button>
+<div class="container-fluid">
+    <div class="tableFixHead">
+      
+      <table class = "theTable">
+          <tr>
+              <th>Id</th>
+              <th>Key</th>
+              <th>Image</th>
+              <th>Title</th>
+              <th>Date<br>
+              Media<br>
+              Dims</th>
+              <th>Status</th>
+          </tr>
+          {% for work, image in works %}
+
+
+              <tr>
+                  <td>{{ work.id }}</td>   
+                  <td><a href="{% url 'catalog:catalog_edit' work.pk %}"  onclick="saveScroll()"> {{ work.work_key }}  </a> </td>     
+                  <td><a href="{{ image.image.url }}">  <img height="150px" src="{{ image.image.url }}" onclick="saveScroll()"></a></td>     
+                  <td>{{ work.title }}</td>
+                  <td><p>{{ work.work_date }}<br>
+                          {{work.media }}<br>
+                          {{work.dimensions}}<br>
+                          </p>
+                  </td>
+
+                  <td>{{ work.status }}</td>
+
+              </tr>
+          {% endfor %}
+      </table>
+     
+    </div>
+
+
+</div>             
+
+
+
+   
+
+</div>
+</div>
+
+
+{% endblock %}

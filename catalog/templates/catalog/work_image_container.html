@@ -1,0 +1,211 @@
+<!-- catalog/templates/catalog/work_image_conatiner.html -->
+
+    {% load widget_tweaks %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="row">
+                    <div col="col-md-3">
+                        {% render_field workform.work_key.label_tag %} 
+                        {% render_field workform.work_key size="12" %}
+                        {{ workform.work_key.errors }}
+                    </div>
+                </div>
+                <div class="row"><div class="col">&nbsp;</div></div>
+                <div class="row">
+                       
+                    <div class="col-md-8">
+                        {% render_field workform.title.label_tag %} 
+                        {% render_field workform.title size="60" autofocus="" %}
+                        {{ workform.title.errors }}
+                    </div>
+                    <div class="col-md-4">
+                        {% render_field workform.work_date.label_tag %}
+                        {% render_field workform.work_date size="7" %}
+                        {{workform.work_date.errors }} 
+                    </div>
+
+                </div>
+
+                <div class="row"><div class="col">&nbsp;</div></div>
+                <div class="row">
+                        
+                    <div class="col">
+                        {% render_field workform.work_type.label_tag %}
+                        {% render_field workform.work_type  onchange="buildkey()"%}
+                        {{workform.work_type.errors }}
+                    </div>
+                    <div class="col">
+                        {% render_field workform.media.label_tag %}
+                        {% render_field workform.media %}
+                        {{workform.media.errors }}
+                    </div>
+
+                    <div class="col">
+                        {% render_field workform.price.label_tag %}
+                        {% render_field workform.price size="7" %}
+                        {{workform.price.errors }}
+                    </div>
+
+                </div>
+                
+            
+                <div class="row"><div class="col">&nbsp;</div></div>
+                    
+    
+
+                <div class="row"> 
+                       
+                    <div class="col">
+                        {% render_field workform.dims_height.label_tag %}
+                        {% render_field workform.dims_height step=".25" size="5" %}
+                        {{workform.dims_height.errors }}
+                    </div>
+                    <div class="col">
+                        {% render_field workform.dims_width.label_tag %}
+                        {% render_field workform.dims_width step=".25" size="5" %}
+                        {{workform.dims_width.errors }}
+                    </div>
+                    <div class="col">
+                        {% render_field workform.dims_depth.label_tag %}
+                        {% render_field workform.dims_depth step=".25" size="5" %}
+                        {{workform.dims_depth.errors }}
+                    </div>
+
+                </div>
+
+    
+
+
+        
+
+                <div class="row"><div class="col">&nbsp;</div></div>
+              
+                <div class="row" >
+                    
+                    <div class="col">                
+                        {% render_field workform.description.label_tag %} <br>
+                        {% render_field workform.description cols="30" rows="3" %}
+                        {{workform.description.errors }}               
+                    </div>
+                   
+                     
+                    <div class="col"> 
+                        {% render_field workform.notes.label_tag %}  <br>
+                        {% render_field workform.notes cols="30" rows="3" %}
+                        {{workform.notes.errors }}
+                    </div>
+
+                    
+                    <div class="col">    
+                        {% render_field workform.inscription.label_tag %}  <br>
+                        {% render_field workform.inscription cols="30" rows="3" %}
+                        {{workform.inscription.errors }}
+                    </div>
+
+                </div>
+            
+                <div class="row"><div class="col">&nbsp;</div></div>
+                <div class="row"  > 
+               
+                    <div class="col">
+                        {% render_field workform.status.label_tag %}  
+                        {% render_field workform.status  %}
+                        {{workform.status.errors }}
+                    </div>
+                    <div class="col">
+                        {% render_field workform.sold_date.label_tag %}  
+                        {% render_field workform.sold_date size="7"  %}
+                        {{workform.sold_date.errors }}
+                    </div>
+                    <div class="col">
+                        {% render_field workform.sold_to.label_tag %}  
+                        {% render_field workform.sold_to  %}
+                        {{workform.sold_to.errors }}
+                    </div>
+                    <div class="col">
+                        {% render_field workform.sale_price.label_tag %}  
+                        {% render_field workform.sale_price size="5"  %}
+                        {{workform.sale_price.errors }}
+                    </div>
+                    
+                  
+                </div>
+                <div class="row"><div class="col">&nbsp;</div></div>
+
+                <div class="row">
+                        
+
+                    <p>
+                        <input type="submit" name="action" value="Save" id="saveButton" accesskey="s"> 
+                        <input type="submit" name="action" value="Delete" id="deleteButton"onclick="return confirm('Are you sure you want to delete this entry and any associated images?')">
+                        <input type="submit" name="action" value="Cancel" id="canceButton" onclick="return confirm('Are you sure you want to cancel?')">
+                    </p>
+                </div>
+            </div>
+  
+        
+            
+
+
+            <div class="col-md-5">
+                {{ imageset.management_form }}
+                {% for image in imageset %} 
+                    {% render_field image.id type="hidden" %}
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        
+                            {% render_field image.image.label_tag %}  
+                            {% render_field image.image onchange="preview(this)" accesskey="c"  %}
+                            {{image.image.errors  }}
+
+                      
+
+                            <img id="imageframe" src="{{ image.initial.image.url }}" width="250px"  name="imageframe"/>
+                        <div class="row"><div class="col">&nbsp;</div></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {% render_field image.image_type.label_tag %}  
+                                {% render_field image.image_type   %}
+                                {{ image.image_type.errors }}
+                            </div>
+                            <div class="col">                                                        
+                                {% render_field image.image_source.label_tag %}  
+                                {% render_field image.image_source    %}
+                                {{ image.image_source.errors }}
+                            </div>   
+                            <div class="col">                            
+                                {% render_field image.image_file_name.label_tag %}  
+                                {% render_field image.image_file_name    %}
+                                {{ image.image_file_name.errors }}   
+                            </div>
+                        </div>
+                        <div class="row"><div class="col">&nbsp;</div></div> 
+                        <div class="row">
+                            <div class="col">
+                                {% render_field image.image_notes.label_tag %} <br> 
+                                {% render_field image.image_notes cols="40" rows="3"  %}
+                                {{image.image_notes.errors }}
+                            </div>
+                            <div class="row"><div class="col">&nbsp;</div></div>
+                        <div class="row">
+                            <div class="col">
+                                {{ image.DELETE }} Check box and Save to delete this image 
+                            </div>
+
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+                
+        </div>
+
+       
+    </div>
+    
+    <div id="usedkeys" style="display:none" data-values='{% for work in keys %} {{ work.work_key }},{% endfor %}' </div>
+
+ 

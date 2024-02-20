@@ -1,0 +1,127 @@
+<!-- catalog/templates/catalog/catalog_add.html -->
+<script>
+    function preview(imagefield) {
+        // pull the index out of the id so we can find the matching file and img display field
+        idArray = imagefield.id.split("-");
+        nbr = idArray[1];
+        frames = document.getElementsByName("imageframe");
+        ifrm = frames[nbr];
+        
+        // populate the image name
+        filenameid = "id_image_set-" + nbr + "-image_file_name";
+        iname = document.getElementById(filenameid);
+        iname.value = event.target.files[nbr].name;
+        
+        ifrm.src=URL.createObjectURL(event.target.files[nbr]);
+        ifrm.style=""; 
+        
+        //TO DO:  On Load, hide the delete button
+
+    }
+
+    function fix() {
+    
+    }
+
+    function buildkey() {
+        workkey = document.getElementById("id_work_key");
+        if (workkey.value != "") {
+            return;
+        }
+
+
+        t = document.getElementById("id_title").value;
+        d = document.getElementById("id_work_date").value;
+        p = document.getElementById("id_work_type").value;
+
+        if (!t || t.length < 4) {
+            confirm("Title is required and must be at least 3 characters");
+        }
+
+        if (!d) {
+            d = "????";
+        }
+
+        date = d.slice(-2);
+        romanNum = true;
+        typ = p.slice(0,1);
+                if (t.includes(" III")) {
+                    num = "03";
+                }
+                else if (t.includes(" II")) {
+                    num = "02";
+                }
+                else if (t.includes(" I")) {
+                    num = "01";
+                }
+                else if (t.includes(" IV")) {
+                    num = "04";
+                }
+                else if (t.includes(" V")) {
+                    num = "05";
+                }
+                else {  
+                    num = "01"; 
+                    romanNum = false;
+                }
+
+                caps = t.match(/[A-Z]+/g, "");
+
+        upper = ''
+        lower = ''
+        arr = t.split('')
+        i = 0
+        for (n = 0; n < t.length; n++) {
+        c = t.charAt(n);
+        uc = c.match(/[A-Z]/);
+
+        if (uc) {
+            upper = upper + uc;
+        }
+        lc = c.match(/[a-z]/);
+        if (lc) {
+            lower = lower + lc;
+        }
+
+        }
+
+        switch (upper.length) {
+        case 0:
+            part2 = lower;
+            break;
+        case 1:
+            part2 = upper + lower;
+            break;
+        case 2:
+            part2 = upper.charAt(0) + lower.charAt(0) + upper.charAt(1);
+            break;
+        default:
+            part2 = upper;
+
+        }
+
+        workkey.value = typ.toUpperCase() + date + part2.toUpperCase().slice(0,3) + num;
+
+
+    return;
+    
+    }
+</script>
+{% extends "base.html" %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block page_content %}
+<h1>{{ work.str }}</h1>
+<form method = "post"  id="formId" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% include "catalog/work_image_container.html" %} 
+
+
+
+</form>
+
+{% endblock page_content %}

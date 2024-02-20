@@ -1,0 +1,67 @@
+<!-- catalog/templates/catalog/catalog_cards.html -->
+<script>
+    function fix() {
+       
+        
+    }
+</script>
+
+{% extends "base.html" %}
+
+
+{% block page_content %}
+
+<h1>Catalog</h1>
+<button type="button">
+    <a href="{% url 'catalog:catalog_add' %}">Add</a>
+</button>
+
+<div class="container-fluid">
+<div class="row">
+
+{% for work, image in works %}
+
+    <div class="col-md-3">
+
+        <div class="card mb-2"> 
+
+            <div class="card-body">
+
+                <h5 class="card-title">{{ work.title }}</h5>
+                <a href="{% url 'catalog:catalog_detail' work.pk %}">  <img class="card-img-top"  src="{{ image.image.url }}"></a>
+
+                <p class="card-text">
+                    <table>  
+                        <tr>
+                            <td>{{ work.work_date }}</td>
+
+                        </tr>
+                        <tr>
+                            <td>{{ work.media }}</td>
+
+                        </tr>
+                        <tr>
+                            <td>{{ work.dimensions }}</td>
+                        </tr>
+
+                    
+
+                    </table>
+                   <a href="{% url 'catalog:catalog_edit' work.pk %}">Edit</a> 
+                </p>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,57 @@
+<!-- catalog/templates/catalog/catalog_add.html -->
+<script>
+    function preview(imagefield) {
+        // pull the index out of the id so we can find the matching file and img display field
+        idArray = imagefield.id.split("-");
+        nbr = idArray[1];
+        frames = document.getElementsByName("imageframe");
+        ifrm = frames[nbr];
+        
+        // populate the image name
+        filenameid = "id_image_set-" + nbr + "-image_file_name";
+        iname = document.getElementById(filenameid);
+        iname.value = event.target.files[0].name;
+        
+        ifrm.src=URL.createObjectURL(event.target.files[0]);
+        ifrm.style=""; 
+
+    }
+
+    function fix() {
+        // dims will almost ALWAYS be integers, but we allow for halfs and quarters.  If there's nothing to the right of the decimal, suppress it
+        x = document.getElementById("id_dims_height")
+        x.value = parseFloat(x.value)
+        x = document.getElementById("id_dims_width")
+        x.value = parseFloat(x.value)
+        x = document.getElementById("id_dims_depth")
+        x.value = parseFloat(x.value)
+
+        // frames = document.getElementsByName("imageframe");  not working.  Maybe try looking for src="" and hiding the image in that case
+        // for (n=0; n < frames.length; n++) {
+        //     imageid = "id_image_set-" + n + "-image";
+        //     image = document.getElementById(imageid);
+        //     ifrm = frames[n];
+        //     ifrm.src=URL.createObjectURL(image.value)
+        //     ifrm.style = ""
+        // }
+
+    
+    }
+</script>
+{% extends "base.html" %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block page_content %}
+<h1>{{ work.str }}</h1>
+<form method = "post"  id="formId" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% include "catalog/work_image_container.html" %} 
+
+
+</form>
+
+{% endblock page_content %}

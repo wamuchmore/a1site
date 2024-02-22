@@ -19,9 +19,9 @@ class Work(models.Model):
     work_type = models.CharField("type", max_length=100,choices=work_type_choices)
     media = models.CharField(max_length = 100,choices=media_choices)
 
-    dims_height = models.DecimalField("height",max_digits = 6,decimal_places = 1,null=True,blank=True)
-    dims_width = models.DecimalField("width",max_digits = 6,decimal_places = 1,null=True,blank=True)
-    dims_depth = models.DecimalField("depth",max_digits = 6,decimal_places = 1,null=True,blank=True)
+    dims_height = models.DecimalField("height",max_digits = 6,decimal_places = 2,null=True,blank=True)
+    dims_width = models.DecimalField("width",max_digits = 6,decimal_places = 2,null=True,blank=True)
+    dims_depth = models.DecimalField("depth",max_digits = 6,decimal_places = 2,null=True,blank=True)
     dims_unit = models.CharField(max_length = 20,default="inches")
  #   @admin.display(
  #       boolean=True,

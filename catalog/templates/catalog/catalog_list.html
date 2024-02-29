@@ -40,10 +40,25 @@
 
 
 {% block page_content %}
+<form action="" method="get">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-10">
+        <button type="button">
+            <a href="{% url 'catalog:catalog_add' %}">Add</a>
+        </button>
+      </div>
+      <div class="col-md-2">
+        <input name="tsearch" id="tsearch" type="text">
+        <input type="submit" value="Search">
+      </div>
+    </div>
+  </div>
+</form>
 
-<button type="button">
-    <a href="{% url 'catalog:catalog_add' %}">Add</a>
-</button>
+
+
+
 <div class="container-fluid">
     <div class="tableFixHead">
       

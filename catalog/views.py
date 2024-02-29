@@ -1,4 +1,5 @@
 from django.db.models.query import QuerySet
+from django.db.models import Q
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
@@ -8,6 +9,7 @@ from django.utils import timezone
 from a1site.utils import pick_best_image
 from . models import Work, Image
 from . forms import WorkForm,ImageForm
+
  
 
 def home(request):
@@ -29,8 +31,10 @@ def catalog_cards(request):
 
 def catalog_list(request):
     # works = Work.objects.raw("select c.*, i.* from catalog_work c left outer join catalog_image i on c.id = i.work_id and i.image_type = 'primary'")
+    srch = request.GET.get('tsearch','')
     works = []
-    for w in Work.objects.all():
+    for w in Work.objects.filter(Q(title__icontains=srch) | Q(media__icontains=srch) | Q(description__icontains=srch) | Q(notes__icontains=srch) | Q(inscription__icontains=srch) | Q(work_date__icontains=srch)):
+    # for w in Work.objects.all():
         images = Image.objects.filter(work_id = w.id)
         best = pick_best_image(images)         
         works.append([w,best])

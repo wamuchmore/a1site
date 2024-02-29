@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-gc1c)^!hd(e(hg@b*q3t77@$xe5cy)=(tly@#@l1!4)sperzv#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["192.168.0.102","localhost"]
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks', 
+    'mod_wsgi.server',
     'django_cleanup.apps.CleanupConfig', # docs say this should be last
 ]
 

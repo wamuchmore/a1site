@@ -1,6 +1,9 @@
 <!-- catalog/templates/catalog/catalog_list.html -->
 
 <style>
+    body {
+      overflow:visible
+    }
     table {
       font-family: arial, sans-serif;
       border-collapse: collapse;
@@ -41,14 +44,14 @@
 
 {% block page_content %}
 <form action="" method="get">
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
-      <div class="col-md-10">
+      <div class="col">
         <button type="button">
             <a href="{% url 'catalog:catalog_add' %}">Add</a>
         </button>
       </div>
-      <div class="col-md-2">
+      <div class="col" style="text-align:right">
         <input name="tsearch" id="tsearch" type="text">
         <input type="submit" value="Search">
       </div>
@@ -59,12 +62,12 @@
 
 
 
-<div class="container-fluid">
+<div class="container">
     <div class="tableFixHead">
       
-      <table>
+      <table style="overflow:scroll">
           <tr>
-              <th>Id</th>
+              <th>&nbsp;Id</th>
               <th>Key</th>
               <th>Image</th>
               <th>Title</th>
@@ -77,7 +80,7 @@
 
 
               <tr>
-                  <td>{{ work.id }}</td>   
+                  <td>&nbsp;{{ work.id }}</td>   
                   <td><a href="{% url 'catalog:catalog_edit' work.pk %}"  onclick="saveScroll()"> {{ work.work_key }}  </a> </td>     
                   <td><a href="{{ image.image.url }}">  <img height="150px" src="{{ image.image.url }}" onclick="saveScroll()"></a></td>     
                   <td>{{ work.title }}</td>
@@ -92,18 +95,8 @@
               </tr>
           {% endfor %}
       </table>
-     
     </div>
-
-
-</div>             
-
-
-
-   
-
 </div>
-</div>
-
+  
 
 {% endblock %}

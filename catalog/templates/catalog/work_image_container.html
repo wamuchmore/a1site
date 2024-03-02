@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-7">
                 <div class="row">
-                    <div col="col-md-3">
+                    <div class="col">
                         {% render_field workform.work_key.label_tag %} 
                         {% render_field workform.work_key size="12" %}
                         {{ workform.work_key.errors }}
@@ -22,7 +22,7 @@
                     <div class="col-md-4">
                         {% render_field workform.work_date.label_tag %}
                         {% render_field workform.work_date size="7" %}
-                        {{workform.work_date.errors }} 
+                        {{ workform.work_date.errors }} 
                     </div>
 
                 </div>

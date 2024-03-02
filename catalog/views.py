@@ -30,6 +30,7 @@ def catalog_cards(request):
     return render(request, "catalog/catalog_cards.html", context)
 
 def catalog_list(request):
+    print("here I am")
     # works = Work.objects.raw("select c.*, i.* from catalog_work c left outer join catalog_image i on c.id = i.work_id and i.image_type = 'primary'")
     srch = request.GET.get('tsearch','')
     works = []

@@ -3,5 +3,20 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-    <h1>Hello, World!</h1>
+<div class="container">
+    <table width="600px">
+        <tr>
+            <td> View the list </td>
+            <td> <a href="{% url 'catalog:catalog_list' %}"> Catalog List </a> </td>
+            <td><a href="{% url 'catalog:catalog_list' %}">   {% load static %} <img height="150px"
+                        src="{% static 'cataloglist.png' %}""></a></td>
+
+        </tr>
+        <tr>
+            <td> Add a new entry</td>
+            <td> <a href="{% url 'catalog:catalog_add' %}"> Catalog Add </a> </td>
+        </tr>
+    </table>
+</div>
+
 {% endblock page_content %}
